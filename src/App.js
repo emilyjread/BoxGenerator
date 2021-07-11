@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+
 import './App.css';
+import React, {useState} from 'react';
+import MyForm from './components/MyForm';
 
 function App() {
+  const [height, setHeight] = useState("");
+  const [color, setColor] = useState("");
+  const [boxDiv, setBoxDiv] = useState([])
+  
+  
+  const makeBox = (color, height) =>{
+    console.log(color, height)
+    setColor(color)
+    setHeight(height)
+    setBoxDiv(boxDiv=>[...boxDiv, <div className="box" style={{backgroundColor:color, height:height+"px"}}>{color}</div>])
+    
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MyForm onNewBox={makeBox}/>
+      <div className="boxdiv">
+        {boxDiv}
+      </div>
     </div>
   );
 }
